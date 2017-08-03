@@ -3,6 +3,14 @@ import java.util.*;
 
 public class LinkedListMultiset<T> extends Multiset<T>
 {
+    // The first node (HEAD)
+    private Node<T> firstNode = null;
+
+    // The current node
+    private Node<T> currentNode = null;
+
+    // The last node (TAIL)
+    private Node<T> lastNode = null;
 
 	public LinkedListMultiset() {
 		// Implement me!
@@ -50,6 +58,9 @@ class Node<T>
 	// The item in this current node
 	private T item;
 
+	// Sequence number of this item
+    private int itemSeq;
+
 	// Constructor
 	public Node(T item)
 	{
@@ -86,4 +97,14 @@ class Node<T>
 	{
 		this.item = item;
 	}
+
+	public void setItemSeq(int itemSeq)
+    {
+        this.itemSeq = itemSeq;
+    }
+
+    public int getItemSeq()
+    {
+        return itemSeq;
+    }
 }
