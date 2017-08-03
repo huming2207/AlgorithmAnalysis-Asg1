@@ -3,6 +3,7 @@ import java.util.*;
 
 public class LinkedListMultiset<T> extends Multiset<T>
 {
+
 	public LinkedListMultiset() {
 		// Implement me!
 	} // end of LinkedListMultiset()
@@ -18,7 +19,7 @@ public class LinkedListMultiset<T> extends Multiset<T>
 		
 		// default return, please override when you implement this method
 		return 0;
-	} // end of add()
+	} // end of search()
 	
 	
 	public void removeOne(T item) {
@@ -36,3 +37,53 @@ public class LinkedListMultiset<T> extends Multiset<T>
 	} // end of print()
 	
 } // end of class LinkedListMultiset
+
+// LinkedList Nodes
+class Node<T>
+{
+	// Previous node
+	private Node<T> PreviousNode;
+
+	// Next node
+	private Node<T> NextNode;
+
+	// The item in this current node
+	private T item;
+
+	// Constructor
+	public Node(T item)
+	{
+		this.item = item;
+	}
+
+	// Getters and setters lol...
+	public Node<T> getPreviousNode()
+	{
+		return PreviousNode;
+	}
+
+	public void setPreviousNode(Node<T> previousNode)
+	{
+		PreviousNode = previousNode;
+	}
+
+	public Node<T> getNextNode()
+	{
+		return NextNode;
+	}
+
+	public void setNextNode(Node<T> nextNode)
+	{
+		NextNode = nextNode;
+	}
+
+	public T getItem()
+	{
+		return item;
+	}
+
+	public void setItem(T item)
+	{
+		this.item = item;
+	}
+}
