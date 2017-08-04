@@ -22,7 +22,10 @@ public class Node<T>
         this.instanceCount = instanceCount;
     }
 
-
+    public Node(T item)
+    {
+        this.item = item;
+    }
 
     // Getters and setters lol...
     public Node<T> getPreviousNode()
