@@ -11,13 +11,18 @@ public class Node<T>
     private T item;
 
     // Sequence number of this item
-    private int itemSeq;
+    private int instanceCount;
 
     // Constructor
-    public Node(T item)
+    public Node(T item, Node<T> previousNode, Node<T> nextNode, int instanceCount)
     {
         this.item = item;
+        this.setPreviousNode(previousNode);
+        this.setNextNode(nextNode);
+        this.instanceCount = instanceCount;
     }
+
+
 
     // Getters and setters lol...
     public Node<T> getPreviousNode()
@@ -50,13 +55,13 @@ public class Node<T>
         this.item = item;
     }
 
-    public void setItemSeq(int itemSeq)
+    public void setInstanceCount(int instanceCount)
     {
-        this.itemSeq = itemSeq;
+        this.instanceCount = instanceCount;
     }
 
-    public int getItemSeq()
+    public int getInstanceCount()
     {
-        return itemSeq;
+        return instanceCount;
     }
 }
