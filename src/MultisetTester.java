@@ -150,7 +150,7 @@ public class MultisetTester
 				multiset = new BalTreeMultiset<String>();
 				break;
 			default:
-				System.err.println("Unknown implmementation type.");
+				System.err.println("Unknown implementation type.");
 				usage(progName);
 		}
 
