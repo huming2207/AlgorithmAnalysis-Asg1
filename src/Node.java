@@ -10,8 +10,9 @@ public class Node<T>
     // The item in this current node
     private T item;
 
-    // Sequence number of this item
+    // Instance count of this item
     private int instanceCount;
+
 
     // Constructor
     public Node(T item, Node<T> previousNode, Node<T> nextNode, int instanceCount)
@@ -22,10 +23,7 @@ public class Node<T>
         this.instanceCount = instanceCount;
     }
 
-    public Node(T item)
-    {
-        this.item = item;
-    }
+    public Node(T item) { this.item = item; }
 
     // Getters and setters lol...
     public Node<T> getPreviousNode()
@@ -67,4 +65,5 @@ public class Node<T>
     {
         return instanceCount;
     }
+
 }
