@@ -1,12 +1,9 @@
 import java.io.PrintStream;
-import java.lang.reflect.Array;
-import java.util.*;
 
 public class SortedLinkedListMultiset<T> extends Multiset<T>
 {
     private Node<T> firstNode;
     private Node<T> lastNode;
-
 
 	public SortedLinkedListMultiset()
 	{

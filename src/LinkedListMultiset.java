@@ -1,5 +1,4 @@
 import java.io.PrintStream;
-import java.util.*;
 
 public class LinkedListMultiset<T> extends Multiset<T>
 {
