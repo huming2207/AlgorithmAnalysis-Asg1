@@ -129,6 +129,7 @@ public class SortedLinkedListMultiset<T> extends Multiset<T>
         removeNode(node);
 
         updateInstanceCount(item, -1);
+        bubbleSort();
 	} // end of removeOne()
 	
 	
@@ -146,6 +147,7 @@ public class SortedLinkedListMultiset<T> extends Multiset<T>
             // Move to next node
             nodePointer = nodePointer.getNextNode();
         }
+        bubbleSort();
 	} // end of removeAll()
 	
 	
