@@ -4,9 +4,13 @@ public class SortedLinkedListMultiset<T> extends Multiset<T>
 {
     private Node<T> firstNode;
     private Node<T> lastNode;
+    private int nodeCount;
 
 	public SortedLinkedListMultiset()
 	{
+	    firstNode = null;
+	    lastNode = null;
+	    nodeCount = 0;
 	} // end of SortedLinkedListMultiset()
 	
 	
@@ -29,6 +33,10 @@ public class SortedLinkedListMultiset<T> extends Multiset<T>
             lastNode = newNode;
         }
 
+        nodeCount++;
+
+        // Do bubble sort after adding procedure.
+        bubbleSort();
 	} // end of add()
 	
 
@@ -112,7 +120,7 @@ public class SortedLinkedListMultiset<T> extends Multiset<T>
         }
 
         node.setItem(null);
-
+        nodeCount--;
     }
 
 	public void removeOne(T item)
@@ -121,7 +129,6 @@ public class SortedLinkedListMultiset<T> extends Multiset<T>
         removeNode(node);
 
         updateInstanceCount(item, -1);
-
 	} // end of removeOne()
 	
 	
@@ -155,32 +162,66 @@ public class SortedLinkedListMultiset<T> extends Multiset<T>
 
     public void bubbleSort()
     {
-        boolean swapped = false;
-        Node<T> selectedNode = firstNode;
-        Node<T> nextSelectedNode = firstNode.getNextNode();
+        // Reference: some design ideas followed the lab source code template (Lab #1 and #2)
+        boolean swapped;
 
-        while(swapped)
+        Node<T> nodePointer = firstNode;
+
+        // Only runs if there are more than 1 nodes.
+        if(nodeCount > 1)
         {
-            swapped = false;
-            while(selectedNode != null && selectedNode.getNextNode() != null)
+            do
             {
-                if(selectedNode.getInstanceCount() > selectedNode.getNextNode().getInstanceCount())
+                swapped = false;
+
+                // Do the comparison by looping around
+                for(int loopIndex = 0; loopIndex < getNodeCount() - 1; loopIndex++)
                 {
-                    Node<T> tempNode = selectedNode;
-                    selectedNode = nextSelectedNode;
-                    nextSelectedNode = tempNode;
-                    swapped = true;
+                    // Swap when the first node's instance count is larger than the next one
+                    if(nodePointer.getInstanceCount() > nodePointer.getNextNode().getInstanceCount())
+                    {
+                        swapped = true;
+                        swapNode(nodePointer, nodePointer.getNextNode());
+                    }
+
+                    nodePointer = nodePointer.getNextNode();
                 }
-
-                if(swapped)
-                {
-
-                }
-
-                selectedNode = nextSelectedNode;
-                nextSelectedNode = nextSelectedNode.getNextNode();
             }
+            while(swapped);
         }
+    }
+
+    private int getNodeCount()
+    {
+        Node<T> nodePointer = firstNode;
+        int nodeCount = 0;
+
+        while(nodePointer != null)
+        {
+            nodeCount++;
+            nodePointer = nodePointer.getNextNode();
+        }
+
+        return nodeCount;
+    }
+
+
+    private void swapNode(Node<T> firstNode, Node<T> secondNode)
+    {
+        // Assume we've got 4 nodes, 1, 2, 3, 4;
+        // SWAP 2 AND 3...
+
+        // 2.Next -> 4
+        firstNode.setNextNode(secondNode.getNextNode());
+
+        // 3.Previous -> 1
+        secondNode.setPreviousNode(firstNode.getPreviousNode());
+
+        // 3.Next -> 2
+        secondNode.setNextNode(firstNode);
+
+        // 2.Previous -> 3
+        firstNode.setPreviousNode(secondNode);
     }
 
 
