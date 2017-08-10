@@ -1,6 +1,8 @@
+import sun.awt.im.CompositionArea;
+
 import java.io.PrintStream;
 
-public class LinkedListMultiset<T> extends Multiset<T>
+public class LinkedListMultiset<T extends Comparable<T>> extends Multiset<T>
 {
     // The first node (HEAD)
     private Node<T> firstNode = null;
