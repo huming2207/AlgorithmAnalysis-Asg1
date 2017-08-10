@@ -36,7 +36,7 @@ public class SortedLinkedListMultiset<T> extends Multiset<T>
         nodeCount++;
 
         // Do bubble sort after adding procedure.
-        bubbleSort();
+        bubbleSortByAlphabeticalOrder();
 	} // end of add()
 	
 
@@ -129,7 +129,7 @@ public class SortedLinkedListMultiset<T> extends Multiset<T>
         removeNode(node);
 
         updateInstanceCount(item, -1);
-        bubbleSort();
+        bubbleSortByAlphabeticalOrder();
 	} // end of removeOne()
 	
 	
@@ -147,7 +147,7 @@ public class SortedLinkedListMultiset<T> extends Multiset<T>
             // Move to next node
             nodePointer = nodePointer.getNextNode();
         }
-        bubbleSort();
+        bubbleSortByAlphabeticalOrder();
 	} // end of removeAll()
 	
 	
@@ -162,7 +162,7 @@ public class SortedLinkedListMultiset<T> extends Multiset<T>
         }
 	} // end of print()
 
-    public void bubbleSort()
+    private void bubbleSortByAlphabeticalOrder()
     {
         // Reference: some design ideas followed the lab source code template (Lab #1 and #2)
         boolean swapped;
@@ -179,8 +179,8 @@ public class SortedLinkedListMultiset<T> extends Multiset<T>
                 // Do the comparison by looping around
                 for(int loopIndex = 0; loopIndex < getNodeCount() - 1; loopIndex++)
                 {
-                    // Swap when the first node's instance count is larger than the next one
-                    if(nodePointer.getInstanceCount() > nodePointer.getNextNode().getInstanceCount())
+                    // Swap when the first node's alphabetical order is "larger" than the next one
+                    if(nodePointer.getItem().toString().compareTo(nodePointer.getNextNode().toString()) > 0)
                     {
                         swapped = true;
                         swapNode(nodePointer, nodePointer.getNextNode());
