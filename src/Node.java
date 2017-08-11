@@ -1,5 +1,5 @@
 // LinkedList Nodes
-public class Node<T>
+public class Node<T extends Comparable<T>>
 {
     // Previous node
     private Node<T> PreviousNode;

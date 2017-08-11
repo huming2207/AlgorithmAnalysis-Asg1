@@ -1,6 +1,6 @@
 import java.io.PrintStream;
 
-public class SortedLinkedListMultiset<T> extends Multiset<T>
+public class SortedLinkedListMultiset<T extends Comparable<T>> extends Multiset<T>
 {
     private Node<T> firstNode;
     private Node<T> lastNode;
@@ -180,7 +180,7 @@ public class SortedLinkedListMultiset<T> extends Multiset<T>
                 for(int loopIndex = 0; loopIndex < getNodeCount() - 1; loopIndex++)
                 {
                     // Swap when the first node's alphabetical order is "larger" than the next one
-                    if(nodePointer.getItem().toString().compareTo(nodePointer.getNextNode().toString()) > 0)
+                    if(nodePointer.getItem().compareTo(nodePointer.getNextNode().getItem()) > 0)
                     {
                         swapped = true;
                         swapNode(nodePointer, nodePointer.getNextNode());
