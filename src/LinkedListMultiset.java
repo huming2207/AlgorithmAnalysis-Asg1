@@ -3,14 +3,18 @@ import java.io.PrintStream;
 public class LinkedListMultiset<T> extends Multiset<T>
 {
     // The first node (HEAD)
-    private Node<T> firstNode = null;
+    private Node<T> firstNode;
 
     // The last node (TAIL)
-    private Node<T> lastNode = null;
+    private Node<T> lastNode;
+    
+    private int countNode;
 
 	public LinkedListMultiset() {
 		// Implement me!
-		
+		firstNode = null;
+		lastNode = null;
+		countNode = 0;
 	} // end of LinkedListMultiset()
 	
 	
@@ -31,6 +35,7 @@ public class LinkedListMultiset<T> extends Multiset<T>
 	    	lastNode.setNextNode(newNode);
 	    	lastNode = newNode;
 	    }
+	    countNode++;
 	} // end of add()
 	
 	private int updateInstanceCount(T item, int update)
@@ -95,6 +100,7 @@ public class LinkedListMultiset<T> extends Multiset<T>
 			lastNode = node.getPreviousNode();
 		}
 		node.setItem(null);
+		countNode --;
 	}
 	
 	public void removeOne(T item) {
@@ -103,6 +109,7 @@ public class LinkedListMultiset<T> extends Multiset<T>
 		
 		removeNode(node);
         updateInstanceCount(item,-1);
+        
 	} // end of removeOne()
 	
 	
