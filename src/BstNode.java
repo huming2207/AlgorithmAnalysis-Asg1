@@ -2,10 +2,10 @@
 public class BstNode<T extends Comparable<T>>
 {
     //Left Node in BST
-    private BstNode<T> LeftNode;
+    private BstNode<T> leftNode;
 
     //Right Node in BST
-    private BstNode<T> RightNode;
+    private BstNode<T> rightNode;
 
     //element stored in the Node
     private T item;
@@ -13,10 +13,10 @@ public class BstNode<T extends Comparable<T>>
     //record the number of instance
     private int instanceCount;
 
-    public BstNode(T item, int instanceCount, BstNode<T> LeftNode, BstNode<T> RightNode)
+    public BstNode(T item, int instanceCount, BstNode<T> leftNode, BstNode<T> rightNode)
     {
-        this.setLeftNode(LeftNode);
-        this.setRightNode(RightNode);
+        this.setLeftNode(leftNode);
+        this.setRightNode(rightNode);
         this.item = item;
         this.instanceCount = instanceCount;
     }
@@ -25,22 +25,22 @@ public class BstNode<T extends Comparable<T>>
 
     public BstNode<T> getLeftNode()
     {
-        return LeftNode;
+        return leftNode;
     }
 
     public void setLeftNode(BstNode<T> leftNode)
     {
-        LeftNode = leftNode;
+        this.leftNode = leftNode;
     }
 
     public BstNode<T> getRightNode()
     {
-        return RightNode;
+        return rightNode;
     }
 
     public void setRightNode(BstNode<T> rightNode)
     {
-        RightNode = rightNode;
+        this.rightNode = rightNode;
     }
 
     public T getItme()
