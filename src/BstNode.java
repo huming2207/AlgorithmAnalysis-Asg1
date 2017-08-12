@@ -43,7 +43,7 @@ public class BstNode<T extends Comparable<T>>
         this.rightNode = rightNode;
     }
 
-    public T getItme()
+    public T getItem()
     {
         return item;
     }

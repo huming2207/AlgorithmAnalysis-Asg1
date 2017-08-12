@@ -1,16 +1,14 @@
-import sun.awt.im.CompositionArea;
-
 import java.io.PrintStream;
 
 public class LinkedListMultiset<T extends Comparable<T>> extends Multiset<T>
 {
-    // The first node (HEAD)
-    private Node<T> firstNode;
+	// The first node (HEAD)
+	private Node<T> firstNode;
 
-    // The last node (TAIL)
-    private Node<T> lastNode;
-    
-    private int countNode;
+	// The last node (TAIL)
+	private Node<T> lastNode;
+
+	private int countNode;
 
 	public LinkedListMultiset() {
 		// Implement me!
@@ -18,28 +16,42 @@ public class LinkedListMultiset<T extends Comparable<T>> extends Multiset<T>
 		lastNode = null;
 		countNode = 0;
 	} // end of LinkedListMultiset()
-	
-	
+
+
 	public void add(T item) {
 		// Implement me!
 		//create a new node
-	    Node<T> newNode = new Node<>(item);
-    	newNode.setInstanceCount(updateInstanceCount(item, 1));
-    	
-	    if(firstNode == null)
-	    {
+		Node<T> newNode = new Node<>(item);
+		newNode.setInstanceCount(updateInstanceCount(item, 1));
+
+		if(firstNode == null)
+		{
+			// Here we don't need to do any search, since the first node is null (whole list is empty)
 			firstNode = newNode;
 			lastNode = newNode;
 		}
-	    else
-	    {
-	    	newNode.setPreviousNode(lastNode);
-	    	lastNode.setNextNode(newNode);
-	    	lastNode = newNode;
-	    }
-	    countNode++;
+		else
+		{
+			// Run a search before addition
+			Node<T> searchResult = searchHelper(item);
+
+			if(searchResult != null)
+			{
+				// If there is a node already exists with the same item, just +1 for instance count.
+				searchResult.setInstanceCount(searchResult.getInstanceCount() + 1);
+			}
+			else
+			{
+				// ...otherwise, add the item to a new node
+				newNode.setPreviousNode(lastNode);
+				lastNode.setNextNode(newNode);
+				lastNode = newNode;
+			}
+
+		}
+		countNode++;
 	} // end of add()
-	
+
 	private int updateInstanceCount(T item, int update)
 	{
 		Node<T> nodePointer = firstNode;
@@ -54,15 +66,15 @@ public class LinkedListMultiset<T extends Comparable<T>> extends Multiset<T>
 		}
 		return count;
 	}
-	
-	
+
+
 	public int search(T item) {
 		// Implement me!
 		Node<T> nodePointer = searchHelper(item);
 		// default return, please override when you implement this method
 		return (nodePointer!=null)? nodePointer.getInstanceCount():0;
 	} // end of search()
-	
+
 	private Node<T> searchHelper(T item)
 	{
 		Node<T> nodePointer = firstNode;
@@ -72,12 +84,12 @@ public class LinkedListMultiset<T extends Comparable<T>> extends Multiset<T>
 			{
 				return nodePointer;
 			}
-			
+
 			nodePointer = nodePointer.getNextNode();
 		}
 		return null;
 	}
-	
+
 	private void removeNode(Node<T> node)
 	{
 		if(firstNode.equals(node) && lastNode.equals(node))
@@ -104,17 +116,17 @@ public class LinkedListMultiset<T extends Comparable<T>> extends Multiset<T>
 		node.setItem(null);
 		countNode --;
 	}
-	
+
 	public void removeOne(T item) {
 		// Implement me!
 		Node<T> node = searchHelper(item);
-		
+
 		removeNode(node);
-        updateInstanceCount(item,-1);
-        
+		updateInstanceCount(item,-1);
+
 	} // end of removeOne()
-	
-	
+
+
 	public void removeAll(T item) {
 		// Implement me!
 		Node<T> nodePointer = firstNode;
@@ -127,9 +139,9 @@ public class LinkedListMultiset<T extends Comparable<T>> extends Multiset<T>
 			nodePointer = nodePointer.getNextNode();
 		}
 	} // end of removeAll()
-	
-	
-	
+
+
+
 	public void print(PrintStream out) {
 		// Implement me!
 		Node<T> nodePointer = firstNode;
@@ -139,7 +151,7 @@ public class LinkedListMultiset<T extends Comparable<T>> extends Multiset<T>
 			nodePointer = nodePointer.getNextNode();
 		}
 	} // end of print()
-	
+
 } // end of class LinkedListMultiset
 
 

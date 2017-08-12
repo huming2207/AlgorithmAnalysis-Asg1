@@ -2,10 +2,10 @@
 public class Node<T extends Comparable<T>>
 {
     // Previous node
-    private Node<T> previousNode;
+    private Node<T> PreviousNode;
 
     // Next node
-    private Node<T> nextNode;
+    private Node<T> NextNode;
 
     // The item in this current node
     private T item;
@@ -23,27 +23,27 @@ public class Node<T extends Comparable<T>>
         this.instanceCount = instanceCount;
     }
 
-    public Node(T item) { this.item = item; }
+    public Node(T item) { this.item = item; instanceCount = 1; }
 
     // Getters and setters lol...
     public Node<T> getPreviousNode()
     {
-        return previousNode;
+        return PreviousNode;
     }
 
     public void setPreviousNode(Node<T> previousNode)
     {
-        this.previousNode = previousNode;
+        PreviousNode = previousNode;
     }
 
     public Node<T> getNextNode()
     {
-        return nextNode;
+        return NextNode;
     }
 
     public void setNextNode(Node<T> nextNode)
     {
-        this.nextNode = nextNode;
+        NextNode = nextNode;
     }
 
     public T getItem()
