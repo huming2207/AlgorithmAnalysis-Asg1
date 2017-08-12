@@ -37,7 +37,6 @@ public class BstMultiset<T extends Comparable<T>> extends Multiset<T>
             return node; // Useless but just shut up the compiler
         }
 
-        // Addition operation part
         // If the node's item is larger than the new item, then put it to right
         else if(node.getItem().compareTo(item) < 0)
         {
