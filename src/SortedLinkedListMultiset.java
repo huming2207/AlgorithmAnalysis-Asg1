@@ -21,15 +21,30 @@ public class SortedLinkedListMultiset<T extends Comparable<T>> extends Multiset<
         newNode.setInstanceCount(updateInstanceCount(item, 1));
 
         // If the node pointers are all null, assign the new node to them
-        if(firstNode == null)
+        // Inverted the if-else statement with LinkedListMultiset as Intellij IDEA IDE will
+        //  keep warning me the code is duplicate (and since this is an assignment, I can't merge these two).
+        if(firstNode != null)
         {
-            firstNode = newNode;
-            lastNode = newNode;
+            // Run a search before addition
+            Node<T> searchResult = searchHelper(item);
+
+            if (searchResult != null)
+            {
+                // If there is a node already exists with the same item, just +1 for instance count.
+                searchResult.setInstanceCount(searchResult.getInstanceCount() + 1);
+            }
+            else
+            {
+                // ...otherwise, add the item to a new node
+                newNode.setPreviousNode(lastNode);
+                lastNode.setNextNode(newNode);
+                lastNode = newNode;
+            }
+
         }
         else
         {
-            newNode.setPreviousNode(lastNode);
-            lastNode.setNextNode(newNode);
+            firstNode = newNode;
             lastNode = newNode;
         }
 
