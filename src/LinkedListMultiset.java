@@ -91,6 +91,12 @@ public class LinkedListMultiset<T extends Comparable<T>> extends Multiset<T>
 
     private void removeNode(Node<T> node)
     {
+        // stop if the node is null
+        if(node == null)
+        {
+            return;
+        }
+
         if (firstNode.equals(node) && lastNode.equals(node))
         {
             firstNode = null;
@@ -118,26 +124,24 @@ public class LinkedListMultiset<T extends Comparable<T>> extends Multiset<T>
 
     public void removeOne(T item)
     {
-        // Implement me!
         Node<T> node = searchHelper(item);
 
-        removeNode(node);
-        updateInstanceCount(item, -1);
+        if(node != null && node.getInstanceCount() > 1)
+        {
+            node.setInstanceCount(node.getInstanceCount() - 1);
+        }
+        else
+        {
+            removeNode(node);
+        }
 
     } // end of removeOne()
 
 
     public void removeAll(T item)
     {
-        Node<T> nodePointer = firstNode;
-        while (nodePointer != null)
-        {
-            if (nodePointer.getItem().equals(item))
-            {
-                removeNode(nodePointer);
-            }
-            nodePointer = nodePointer.getNextNode();
-        }
+        // remove the node directly
+        removeNode(searchHelper(item));
     } // end of removeAll()
 
 

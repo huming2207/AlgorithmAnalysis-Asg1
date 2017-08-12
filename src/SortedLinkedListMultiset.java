@@ -141,27 +141,41 @@ public class SortedLinkedListMultiset<T extends Comparable<T>> extends Multiset<
 	public void removeOne(T item)
     {
         Node<T> node = searchHelper(item);
-        removeNode(node);
 
-        updateInstanceCount(item, -1);
-        bubbleSortByAlphabeticalOrder();
+        // If node is null (i.e. item not found in the list), stop.
+        if(node == null) return;
+
+        // If node is not null and instance is greater than 1, minus 1 instead of remove the node
+        //  ...or if it is 1, remove it (since there is only 1 left)
+        if(node.getInstanceCount() > 1)
+        {
+            node.setInstanceCount(node.getInstanceCount() - 1);
+        }
+        else
+        {
+            // Remove the node if there is only 1 instance left
+            removeNode(node);
+
+            // Do a sort after removal
+            bubbleSortByAlphabeticalOrder();
+        }
+
+
 	} // end of removeOne()
 	
 	
 	public void removeAll(T item)
     {
-        Node<T> nodePointer = firstNode;
+        // Find out the node
+        Node<T> node = searchHelper(item);
 
-        while (nodePointer != null)
-        {
-            if(nodePointer.getItem().equals(item))
-            {
-                removeNode(nodePointer);
-            }
+        // If node is null (i.e. item not found in the list), stop.
+        if(node == null) return;
 
-            // Move to next node
-            nodePointer = nodePointer.getNextNode();
-        }
+        // Instead of deducting instance count, here we just remove the node.
+        removeNode(node);
+
+        // Run sort
         bubbleSortByAlphabeticalOrder();
 	} // end of removeAll()
 	
