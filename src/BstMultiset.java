@@ -185,7 +185,7 @@ public class BstMultiset<T extends Comparable<T>> extends Multiset<T>
 
 		// Start iterate from left node, then print, then right node
 		printByAscendingOrder(node.getLeftNode(), out);
-		out.println(node.getInstanceCount() + printDelim + node.getItem().toString());
+		out.println(node.getItem() + printDelim + node.getInstanceCount() );
 		printByAscendingOrder(node.getRightNode(), out);
 	}
 
