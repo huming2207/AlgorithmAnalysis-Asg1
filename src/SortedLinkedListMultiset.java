@@ -4,13 +4,11 @@ public class SortedLinkedListMultiset<T extends Comparable<T>> extends Multiset<
 {
     private Node<T> firstNode;
     private Node<T> lastNode;
-    private int nodeCount;
 
 	public SortedLinkedListMultiset()
 	{
 	    firstNode = null;
 	    lastNode = null;
-	    nodeCount = 0;
 	} // end of SortedLinkedListMultiset()
 	
 	
@@ -38,7 +36,6 @@ public class SortedLinkedListMultiset<T extends Comparable<T>> extends Multiset<
                 newNode.setPreviousNode(lastNode);
                 lastNode.setNextNode(newNode);
                 lastNode = newNode;
-                nodeCount++;
             }
 
         }
@@ -46,7 +43,6 @@ public class SortedLinkedListMultiset<T extends Comparable<T>> extends Multiset<
         {
             firstNode = newNode;
             lastNode = newNode;
-            nodeCount++;
         }
 
 
@@ -113,7 +109,6 @@ public class SortedLinkedListMultiset<T extends Comparable<T>> extends Multiset<
         }
 
         node.setItem(null);
-        nodeCount--;
     }
 
 	public void removeOne(T item)
@@ -177,60 +172,41 @@ public class SortedLinkedListMultiset<T extends Comparable<T>> extends Multiset<
         Node<T> nodePointer = firstNode;
 
         // Only runs if there are more than 1 nodes.
-        if(nodeCount > 1)
+
+        do
         {
-            do
+            swapped = false;
+
+            // Do the comparison by looping around
+            while (nodePointer.getNextNode() != null)
             {
-                swapped = false;
-
-                // Do the comparison by looping around
-                for(int loopIndex = 0; loopIndex < getNodeCount() - 1; loopIndex++)
+                // Swap when the first node's alphabetical order is "larger" than the next one
+                if(nodePointer.getItem().compareTo(nodePointer.getNextNode().getItem()) > 0)
                 {
-                    // Swap when the first node's alphabetical order is "larger" than the next one
-                    if(nodePointer.getItem().compareTo(nodePointer.getNextNode().getItem()) > 0)
-                    {
-                        swapped = true;
-                        swapNode(nodePointer, nodePointer.getNextNode());
-                    }
-
-                    nodePointer = nodePointer.getNextNode();
+                    swapped = true;
+                    swapNode(nodePointer, nodePointer.getNextNode());
                 }
+
+                nodePointer = nodePointer.getNextNode();
             }
-            while(swapped);
         }
-    }
-
-    private int getNodeCount()
-    {
-        Node<T> nodePointer = firstNode;
-        int nodeCount = 0;
-
-        while(nodePointer != null)
-        {
-            nodeCount++;
-            nodePointer = nodePointer.getNextNode();
-        }
-
-        return nodeCount;
+        while(swapped);
     }
 
 
     private void swapNode(Node<T> firstNode, Node<T> secondNode)
     {
-        // Assume we've got 4 nodes, 1, 2, 3, 4;
-        // SWAP 2 AND 3...
+        // Create middle pointer to swap
+        T secondItem = secondNode.getItem();
+        int secondInstance = secondNode.getInstanceCount();
 
-        // 2.Next -> 4
-        firstNode.setNextNode(secondNode.getNextNode());
+        // Set second node's item and instance count to the first ones
+        secondNode.setItem(firstNode.getItem());
+        secondNode.setInstanceCount(firstNode.getInstanceCount());
 
-        // 3.Previous -> 1
-        secondNode.setPreviousNode(firstNode.getPreviousNode());
-
-        // 3.Next -> 2
-        secondNode.setNextNode(firstNode);
-
-        // 2.Previous -> 3
-        firstNode.setPreviousNode(secondNode);
+        // Set first node's item and instance count to the second ones (from the pointer)
+        firstNode.setItem(secondItem);
+        firstNode.setInstanceCount(secondInstance);
     }
 
 
