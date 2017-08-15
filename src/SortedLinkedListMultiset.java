@@ -18,7 +18,6 @@ public class SortedLinkedListMultiset<T extends Comparable<T>> extends Multiset<
     {
         // Create a new node
         Node<T> newNode = new Node<>(item);
-        newNode.setInstanceCount(updateInstanceCount(item, 1));
 
         // If the node pointers are all null, assign the new node to them
         // Inverted the if-else statement with LinkedListMultiset as Intellij IDEA IDE will
@@ -39,6 +38,7 @@ public class SortedLinkedListMultiset<T extends Comparable<T>> extends Multiset<
                 newNode.setPreviousNode(lastNode);
                 lastNode.setNextNode(newNode);
                 lastNode = newNode;
+                nodeCount++;
             }
 
         }
@@ -46,36 +46,14 @@ public class SortedLinkedListMultiset<T extends Comparable<T>> extends Multiset<
         {
             firstNode = newNode;
             lastNode = newNode;
+            nodeCount++;
         }
 
-        nodeCount++;
+
 
         // Do bubble sort after adding procedure.
         bubbleSortByAlphabeticalOrder();
 	} // end of add()
-	
-
-    private int updateInstanceCount(T item, int update)
-    {
-        // Set the first node to first node
-        Node<T> nodePointer = firstNode;
-        int count = 1;
-
-        // Do a while loop to search these nodes
-        while (nodePointer != null)
-        {
-            if(nodePointer.getItem().equals(item))
-            {
-                nodePointer.setInstanceCount(nodePointer.getInstanceCount() + update);
-                count = nodePointer.getInstanceCount();
-            }
-
-            nodePointer = nodePointer.getNextNode();
-        }
-
-        // return the count
-        return count;
-    }
 
 
 

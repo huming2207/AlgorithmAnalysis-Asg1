@@ -22,7 +22,6 @@ public class LinkedListMultiset<T extends Comparable<T>> extends Multiset<T>
     {
         // Create a new node
         Node<T> newNode = new Node<>(item);
-        newNode.setInstanceCount(updateInstanceCount(item, 1));
 
         if (firstNode == null)
         {
@@ -52,20 +51,6 @@ public class LinkedListMultiset<T extends Comparable<T>> extends Multiset<T>
         countNode++;
     } // end of add()
 
-    private int updateInstanceCount(T item, int update)
-    {
-        Node<T> nodePointer = firstNode;
-        int count = 1;
-        while (nodePointer != null)
-        {
-            if (nodePointer.getItem().equals(item))
-            {
-                nodePointer.setInstanceCount(nodePointer.getInstanceCount() + update);
-                count = nodePointer.getInstanceCount();
-            }
-        }
-        return count;
-    }
 
 
     public int search(T item)
