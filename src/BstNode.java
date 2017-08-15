@@ -21,7 +21,7 @@ public class BstNode<T extends Comparable<T>>
         this.instanceCount = instanceCount;
     }
 
-    public BstNode(T item) {this.item = item;}
+    public BstNode(T item) { this.item = item; this.instanceCount = 1; }
 
     public BstNode<T> getLeftNode()
     {
